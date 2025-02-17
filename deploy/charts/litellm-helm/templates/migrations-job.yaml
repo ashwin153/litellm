@@ -49,5 +49,8 @@ spec:
             - name: DISABLE_SCHEMA_UPDATE
               value: "false" # always run the migration from the Helm PreSync hook, override the value set
       restartPolicy: OnFailure
+      {{- if .Values.migrationJob.ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ .Values.migrationJob.ttlSecondsAfterFinished }}
+      {{- end }}
   backoffLimit: {{ .Values.migrationJob.backoffLimit }}
 {{- end }}
